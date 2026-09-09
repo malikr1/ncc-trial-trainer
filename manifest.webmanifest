@@ -1,0 +1,11 @@
+{
+  "name": "Neurocritical Care Trial Lockdown",
+  "short_name": "NCC Trials",
+  "description": "Neurocritical care landmark trial active-recall trainer with Name That Trial audio drill.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1119",
+  "theme_color": "#0b1119",
+  "orientation": "any"
+}

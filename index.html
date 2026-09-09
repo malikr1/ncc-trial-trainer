@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Neurocritical Care Trial Lockdown 2026</title><style>
+:root{
+ --bg:#090c11;--panel:#111620;--panel2:#0d1118;--line:#283143;--text:#e7edf7;--muted:#93a2ba;
+ --blue:#69baff;--blue2:#2186d4;--gold:#e6b84c;--red:#ff6b78;--green:#5fd3a2;--violet:#a58cff;
+ --tier1:#ffcf62;--tier2:#6dbdf2;--tier3:#8995a8;--shadow:0 18px 60px rgba(0,0,0,.38)
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 20% -10%,#101827 0,#090c11 35%,#07090d 100%);color:var(--text);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+button,input,textarea,select{font:inherit}.wrap{max-width:1100px;margin:auto;padding:22px 18px 120px}
+.hero,.panel{background:linear-gradient(180deg,rgba(18,24,35,.98),rgba(13,18,27,.98));border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
+.hero{padding:26px;margin-top:12px}.eyebrow{letter-spacing:.12em;color:var(--blue);font-weight:800;font-size:.79rem}.hero h1{font-size:clamp(2rem,5vw,3.35rem);line-height:1.05;margin:.35rem 0 .7rem}.hero p{color:#b7c2d4;max-width:850px;margin:.25rem 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:20px}.stat{background:#0c1119;border:1px solid #202a3c;border-radius:15px;padding:14px}.stat b{display:block;font-size:1.35rem}.stat span{color:var(--muted);font-size:.82rem}
+.panel{padding:20px;margin-top:18px}.panel h2{margin:0 0 13px;color:#8dcbff;letter-spacing:.08em;font-size:1.08rem}
+.tocgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.tocbtn,.chip,.modebtn,.grade,.smallbtn{border:1px solid #29344a;background:#111926;color:var(--text);border-radius:12px;padding:10px 12px;cursor:pointer}.tocbtn{text-align:left}.tocbtn:hover,.chip.active,.modebtn.active{border-color:#4da8ea;background:#12263a}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:6px 10px;border:1px solid #2a3445;color:#ccd6e5;font-size:.82rem}.dot{width:8px;height:8px;border-radius:50%}
+.dashboard{display:grid;gap:11px}.drow{display:grid;grid-template-columns:190px 1fr 56px;gap:12px;align-items:center;cursor:pointer;padding:8px;border-radius:10px}.drow:hover{background:#101925}.bar{height:10px;background:#0a0e14;border:1px solid #242c3a;border-radius:10px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#2186d4,#61d0b1);width:0}.pct{font-variant-numeric:tabular-nums;color:#cbd5e5;text-align:right}
+.controls{display:flex;gap:8px;flex-wrap:wrap}.searchline{display:flex;gap:8px}.searchline input{flex:1;background:#090d13;color:white;border:1px solid #33405a;border-radius:14px;padding:13px 14px;outline:none}.searchline input:focus{border-color:#4da8ea;box-shadow:0 0 0 3px rgba(77,168,234,.12)}
+.triallist{display:grid;gap:14px;margin-top:16px}.trial{scroll-margin-top:16px;background:linear-gradient(180deg,#111722,#0d121a);border:1px solid #273247;border-radius:19px;padding:18px;position:relative;overflow:hidden}.trial:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--tier2)}.trial.t1:before{background:var(--tier1)}.trial.t3:before{background:var(--tier3)}
+.trialhead{display:flex;justify-content:space-between;gap:15px;align-items:flex-start}.trial h3{font-size:1.25rem;margin:0}.meta{color:var(--muted);font-size:.83rem;margin-top:3px}.tier{font-weight:800;font-size:.75rem;padding:5px 8px;border-radius:999px;border:1px solid #4b4b38;color:var(--tier1);white-space:nowrap}.t2 .tier{color:var(--tier2);border-color:#29475a}.t3 .tier{color:var(--tier3);border-color:#37404d}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}.field{background:#0b1017;border:1px solid #202a3a;border-radius:12px;padding:11px}.label{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:#7faed2;font-weight:800}.field p{margin:.28rem 0 0;color:#d7deea}.bottom{border-color:#214c43}.bottom .label{color:var(--green)}.trap{border-color:#4c3421}.trap .label{color:#f0b267}
+.jump{border:0;background:transparent;color:#78c7ff;cursor:pointer;padding:0}
+.studybox{background:#0a0f16;border:1px solid #29354a;border-radius:18px;padding:18px;margin-top:14px}.prompt{font-size:1.12rem;font-weight:700}.answerbox{width:100%;min-height:105px;background:#070a0f;color:#edf3fb;border:1px solid #33405a;border-radius:14px;padding:12px;margin-top:12px;resize:vertical}.reveal{margin-top:12px}.revealed{display:none;margin-top:12px}.revealed.show{display:block}.gradebar{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}.grade.again{border-color:#71303a}.grade.hard{border-color:#795c28}.grade.good{border-color:#295a78}.grade.easy{border-color:#236346}
+.studyNav{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+.fabstack{position:fixed;right:18px;bottom:18px;z-index:50;display:flex;flex-direction:column;gap:11px}.fab{width:56px;height:56px;border-radius:50%;border:1px solid rgba(255,255,255,.12);box-shadow:0 8px 24px rgba(0,0,0,.45);color:white;font-size:1.3rem;cursor:pointer}.fsearch{background:#2c8ed0}.faction{background:#b58d2f}.ftop{background:#3d4350}.fmenu{background:#236ea9}
+.overlay{position:fixed;inset:0;background:rgba(3,6,10,.74);backdrop-filter:blur(5px);display:none;z-index:70;padding:7vh 16px}.overlay.open{display:block}.modal{max-width:850px;max-height:86vh;margin:auto;background:#111620;border:1px solid #33405a;border-radius:20px;box-shadow:0 25px 80px rgba(0,0,0,.65);padding:18px;display:flex;flex-direction:column}.modalhead{display:flex;justify-content:space-between;align-items:center;gap:12px}.modalhead h2{margin:0;color:#89caff;letter-spacing:.06em}.close{border:0;background:transparent;color:#bfc8d8;font-size:1.8rem;cursor:pointer}
+.results{overflow:auto;margin-top:12px;padding-right:4px}.result{padding:13px 2px;border-top:1px dashed #283245;cursor:pointer}.result:first-child{border-top:0}.result:hover{background:#141c29}.rdom{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#96a7c0}.rtitle{font-weight:800;font-size:1.05rem;margin:4px 0}.rsnip{color:#b8c4d7;font-size:.92rem}.hl{background:#6a531f;color:#ffe69a;border-radius:3px;padding:0 2px}
+.hidden{display:none!important}.notice{color:#9bb0c8;font-size:.88rem;margin-top:10px}.countline{color:#9fb0c5;margin-top:9px}.foot{color:#8190a6;font-size:.82rem;margin:24px 2px}.sourcegrid{display:grid;gap:7px}.sourcegrid a{color:#83c9ff;text-decoration:none}
+@media(max-width:720px){.wrap{padding:13px 11px 110px}.hero,.panel{border-radius:17px;padding:16px}.stats{grid-template-columns:repeat(2,1fr)}.tocgrid{grid-template-columns:1fr}.fields{grid-template-columns:1fr}.drow{grid-template-columns:125px 1fr 45px;font-size:.87rem}.trial{padding:15px}.fabstack{right:12px;bottom:12px}.fab{width:52px;height:52px}.overlay{padding:4vh 8px}.gradebar{grid-template-columns:repeat(2,1fr)}}
+
+/* COMPACT LAYOUT OVERRIDES */
+:root{
+ --compact-gap:8px;
+}
+body{font-size:14px;line-height:1.38}
+.wrap{max-width:1180px;padding:10px 10px 70px}
+.hero,.panel{border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.28)}
+.hero{padding:14px;margin-top:6px}
+.eyebrow{font-size:.68rem}
+.hero h1{font-size:clamp(1.6rem,4vw,2.35rem);margin:.2rem 0 .35rem}
+.hero p{margin:.15rem 0;font-size:.88rem}
+.stats{gap:6px;margin-top:10px}
+.stat{border-radius:10px;padding:8px 9px}
+.stat b{font-size:1.05rem}
+.stat span{font-size:.7rem}
+.panel{padding:11px 12px;margin-top:9px}
+.panel h2{font-size:.93rem;margin:0 0 7px;letter-spacing:.06em}
+.tocgrid{grid-template-columns:repeat(3,1fr);gap:5px}
+.tocbtn,.chip,.modebtn,.grade,.smallbtn{border-radius:9px;padding:7px 9px;font-size:.8rem}
+.legend{gap:5px;margin-top:8px}.pill{padding:4px 7px;font-size:.72rem}
+.dashboard{gap:5px}.drow{grid-template-columns:150px 1fr 42px;gap:7px;padding:5px;font-size:.8rem}.bar{height:7px}
+.controls{gap:5px}
+.triallist{gap:7px;margin-top:9px}
+.trial{border-radius:12px;padding:10px 11px}
+.trialhead{gap:8px}.trial h3{font-size:1.02rem}.meta{font-size:.72rem}.tier{font-size:.66rem;padding:3px 6px}
+.fields{gap:6px;margin-top:8px}
+.field{border-radius:9px;padding:8px}.label{font-size:.64rem}.field p{margin:.18rem 0 0;font-size:.84rem}
+.studybox{border-radius:12px;padding:10px;margin-top:8px}.prompt{font-size:.98rem}.answerbox{min-height:74px;border-radius:10px;padding:8px;margin-top:8px}
+.reveal{margin-top:8px}.gradebar{gap:5px;margin-top:8px}.studyNav{margin-top:8px}
+.notice,.countline{font-size:.74rem;margin-top:6px}
+.sourcegrid{gap:4px}.sourcegrid a{font-size:.8rem}
+.foot{font-size:.72rem;margin:13px 2px}
+
+/* collapsible reference cards */
+.trial .fields{display:none}
+.trial.open .fields{display:grid}
+.trialhead{cursor:pointer;user-select:none}
+.trialhead:after{
+ content:"▾"; color:#8fb7d8; font-size:.9rem; margin-left:auto; padding-top:1px;
+}
+.trial.open .trialhead:after{content:"▴"}
+.trialhead .tier{margin-left:auto}
+
+/* compact floating controls: only search, collapse all, top */
+.fabstack{
+ right:10px;bottom:10px;gap:6px;flex-direction:column;align-items:flex-end;
+}
+.fab{
+ width:auto;height:34px;min-width:40px;border-radius:16px;padding:0 11px;
+ font-size:.78rem;background:rgba(23,31,43,.78);backdrop-filter:blur(8px);
+ border:1px solid rgba(139,185,220,.22);box-shadow:0 6px 18px rgba(0,0,0,.28);
+}
+.fsearch,.faction,.ftop,.fmenu{background:rgba(23,31,43,.78)}
+.fab:hover{background:rgba(34,47,64,.92)}
+
+/* search overlay tighter */
+.overlay{padding:3vh 7px}
+.modal{max-width:760px;max-height:88vh;border-radius:14px;padding:10px}
+.modalhead h2{font-size:.95rem}.close{font-size:1.35rem}
+.searchline input{border-radius:10px;padding:9px 10px;font-size:.88rem}
+.results{margin-top:7px}.result{padding:9px 2px}.rdom{font-size:.67rem}.rtitle{font-size:.92rem}.rsnip{font-size:.8rem}
+
+/* responsive portrait */
+@media(max-width:720px){
+ body{font-size:13px}
+ .wrap{padding:7px 7px 62px}
+ .hero,.panel{padding:10px;border-radius:12px}
+ .hero h1{font-size:1.55rem}
+ .stats{grid-template-columns:repeat(4,1fr)}
+ .stat{padding:6px}.stat b{font-size:.9rem}.stat span{font-size:.62rem}
+ .tocgrid{grid-template-columns:1fr 1fr}
+ .fields{grid-template-columns:1fr}
+ .drow{grid-template-columns:108px 1fr 38px;font-size:.72rem}
+ .trial{padding:9px}.trial h3{font-size:.95rem}
+ .fab{height:32px;min-width:38px;border-radius:15px;padding:0 10px;font-size:.74rem}
+ .gradebar{grid-template-columns:repeat(4,1fr)}
+}
+
+/* responsive landscape on phones/tablets */
+@media(orientation:landscape) and (max-height:700px){
+ body{font-size:12.5px}
+ .wrap{max-width:none;padding:6px 8px 54px}
+ .hero{display:grid;grid-template-columns:1.6fr 1fr;gap:10px;align-items:start}
+ .hero .stats{margin-top:0;grid-template-columns:repeat(2,1fr)}
+ .hero h1{font-size:1.45rem}
+ .panel{padding:8px 10px;margin-top:7px}
+ .tocgrid{grid-template-columns:repeat(4,1fr)}
+ .fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .trial{padding:8px 9px}.field{padding:6px 7px}
+ .studybox{padding:8px}.answerbox{min-height:52px}
+ .fabstack{right:8px;bottom:8px;gap:5px}
+ .fab{height:29px;border-radius:14px;padding:0 9px;font-size:.7rem}
+ .modal{max-width:900px;max-height:90vh}
+}
+
+/* very wide landscape */
+@media(orientation:landscape) and (min-width:900px){
+ .fields{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .bottom,.trap{grid-column:auto}
+ .tocgrid{grid-template-columns:repeat(4,1fr)}
+}
+
+
+/* whole reference-section collapse */
+.refheader{
+ display:flex;align-items:center;justify-content:space-between;gap:8px;
+ cursor:pointer;user-select:none;
+}
+.refheader h2{margin:0}
+.refchev{color:#86bce4;font-size:.9rem;transition:transform .16s ease}
+.refpanel.collapsed .refbody{display:none}
+.refpanel:not(.collapsed) .refchev{transform:rotate(180deg)}
+.refpanel.collapsed{padding-bottom:10px}
+
+
+/* compact memory / coverage controls */
+.memorytools{
+  margin-top:7px;
+  border-top:1px solid rgba(126,151,180,.14);
+  padding-top:7px;
+}
+.memorytoggle{
+  display:inline-flex;align-items:center;gap:5px;
+  border:1px solid rgba(126,151,180,.18);
+  background:rgba(17,24,34,.48);
+  color:#9fb2c8;border-radius:13px;padding:4px 8px;
+  font-size:.69rem;cursor:pointer;
+}
+.memorybody{display:none;gap:5px;flex-wrap:wrap;margin-top:6px}
+.memorytools.open .memorybody{display:flex}
+.memreset{
+  border:1px solid rgba(150,165,185,.18);
+  background:rgba(17,24,34,.58);
+  color:#bdc8d7;border-radius:12px;padding:5px 8px;
+  font-size:.68rem;cursor:pointer;
+}
+.memreset.warn{border-color:rgba(224,133,133,.28);color:#e9a0a0}
+.coverage{
+  margin-top:8px;padding:8px 9px;border-radius:9px;
+  background:rgba(23,31,43,.62);border:1px solid rgba(123,157,190,.18);
+}
+.coverage-title{font-size:.71rem;font-weight:800;color:#8fc8f2;letter-spacing:.04em;text-transform:uppercase}
+.coverage-score{font-size:.78rem;color:#c8d3e1;margin-top:3px}
+.coverage-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;margin-top:6px}
+.coverage-item{font-size:.7rem;padding:5px 6px;border-radius:7px;background:#0b1017;border:1px solid #202a3a}
+.coverage-item.hit{border-color:rgba(95,211,162,.35);color:#bfead8}
+.coverage-item.miss{border-color:rgba(230,181,102,.28);color:#d9c79f}
+.coverage-note{font-size:.65rem;color:#7f91a7;margin-top:5px}
+@media(max-width:720px){
+  .coverage-grid{grid-template-columns:1fr 1fr}
+  .memorytoggle,.memreset{font-size:.65rem}
+}
+
+
+.livecov{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  margin-top:6px;padding:5px 7px;border-radius:8px;
+  background:rgba(18,25,35,.48);border:1px solid rgba(110,145,175,.14);
+  font-size:.68rem;color:#8ea0b6;
+}
+.livecov b{color:#b9d8ef;font-size:.76rem}
+.livebar{flex:1;height:5px;max-width:150px;background:#0a0f16;border:1px solid #202b3a;border-radius:5px;overflow:hidden}
+.livefill{height:100%;width:0%;background:linear-gradient(90deg,#c27f62,#d7b65d,#66c49b);transition:width .15s ease}
+
+
+/* Audio Drill */
+.audio-launch{
+ display:flex;align-items:center;justify-content:space-between;gap:8px;
+ margin-top:7px;padding:7px 9px;border:1px solid rgba(119,158,191,.16);
+ border-radius:10px;background:rgba(13,19,28,.5)
+}
+.audio-launch span{font-size:.72rem;color:#94a8be}
+.audio-launch button,.audbtn{
+ border:1px solid rgba(126,170,204,.2);background:rgba(24,35,48,.72);color:#d6e6f2;
+ border-radius:13px;padding:5px 9px;font-size:.69rem;cursor:pointer
+}
+.audioPanel{
+ position:fixed;left:8px;right:8px;bottom:8px;z-index:70;
+ max-width:720px;margin:auto;padding:9px 10px;border-radius:13px;
+ background:rgba(13,20,29,.94);backdrop-filter:blur(12px);
+ border:1px solid rgba(123,166,201,.25);box-shadow:0 12px 35px rgba(0,0,0,.45);
+ display:none;transition:background .18s,border-color .18s
+}
+.audioPanel.show{display:block}
+.audioPanel.correct{background:rgba(16,74,54,.95);border-color:rgba(92,226,167,.55)}
+.audioPanel.wrong{background:rgba(91,31,35,.96);border-color:rgba(242,113,122,.55)}
+.audtop{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.audtitle{font-size:.72rem;font-weight:900;color:#8fd0ff;letter-spacing:.07em}
+.audstatus{font-size:.65rem;color:#9eb0c3}
+.audq{font-size:.82rem;color:#e4ebf2;margin-top:5px;line-height:1.32;max-height:70px;overflow:auto}
+.audheard{font-size:.7rem;color:#9fb0c2;margin-top:4px;min-height:1em}
+.audfeedback{font-size:.78rem;font-weight:800;margin-top:4px}
+.audcontrols{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.audioPanel.correct .audtitle,.audioPanel.correct .audstatus,.audioPanel.correct .audq,.audioPanel.correct .audheard,.audioPanel.correct .audfeedback{color:#ecfff7}
+.audioPanel.wrong .audtitle,.audioPanel.wrong .audstatus,.audioPanel.wrong .audq,.audioPanel.wrong .audheard,.audioPanel.wrong .audfeedback{color:#fff0f1}
+@media(orientation:landscape) and (max-height:700px){
+ .audioPanel{left:auto;right:7px;bottom:7px;width:min(48vw,610px);padding:7px 8px}
+ .audq{font-size:.75rem;max-height:48px}.audcontrols{margin-top:4px}
+}
+
+</style>
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#0b1119">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NCC Trials">
+
+</head>
+<body><div class="wrap" id="top">
+<section class="hero">
+ <div class="eyebrow">NEUROCRITICAL CARE · OCT 5–9, 2026</div>
+ <h1>Trial Lockdown</h1>
+ <p>Retrieval-first board prep: <b>Cold Recall → Reverse Recall → Trial-vs-Trial discrimination.</b> Tier 1 is mastery, Tier 2 is recognition, Tier 3 is searchable context.</p>
+ <div class="stats"><div class="stat"><b id="sTotal">0</b><span>Trials indexed</span></div><div class="stat"><b id="sT1">0</b><span>Tier 1 core</span></div><div class="stat"><b id="sDue">0</b><span>Tier 1 due</span></div><div class="stat"><b id="sMaster">0</b><span>Tier 1 mastered</span></div></div>
+</section>
+
+<section class="panel" id="toc"><h2>TABLE OF CONTENTS</h2><div class="tocgrid"><button class="tocbtn" onclick="filterDomain("Ischemic Stroke")">Ischemic Stroke</button>
+<button class="tocbtn" onclick="filterDomain("Intracerebral Hemorrhage")">Intracerebral Hemorrhage</button>
+<button class="tocbtn" onclick="filterDomain("Subarachnoid Hemorrhage")">Subarachnoid Hemorrhage</button>
+<button class="tocbtn" onclick="filterDomain("Traumatic Brain Injury / ICP")">Traumatic Brain Injury / ICP</button>
+<button class="tocbtn" onclick="filterDomain("Status Epilepticus")">Status Epilepticus</button>
+<button class="tocbtn" onclick="filterDomain("Cardiac Arrest / HIE")">Cardiac Arrest / HIE</button>
+<button class="tocbtn" onclick="filterDomain("General Neurocritical Care")">General Neurocritical Care</button>
+<button class="tocbtn" onclick="filterDomain("Neuromuscular / Infection")">Neuromuscular / Infection</button>
+<button class="tocbtn" onclick="filterDomain("Cerebral Venous / Other")">Cerebral Venous / Other</button></div>
+<div class="legend"><span class="pill"><i class="dot" style="background:var(--tier1)"></i>Tier 1 · Lock down</span><span class="pill"><i class="dot" style="background:var(--tier2)"></i>Tier 2 · Recognize</span><span class="pill"><i class="dot" style="background:var(--tier3)"></i>Tier 3 · Context</span></div></section>
+
+<section class="panel"><h2>PHASE</h2><div style="font-size:1.35rem;font-weight:800" id="phaseName"></div><div class="notice" id="phaseText"></div>
+<div class="memorytools" id="memoryTools">
+  <button class="memorytoggle" onclick="document.getElementById('memoryTools').classList.toggle('open')">Memory ▾</button>
+  <div class="memorybody">
+    <button class="memreset" onclick="resetCurrentCard()">Reset current card</button>
+    <button class="memreset" onclick="resetLastHour()">Reset last hour</button>
+    <button class="memreset warn" onclick="resetFullMemory()">Reset full memory</button>
+  </div>
+</div></section>
+
+<section class="panel"><h2>DOMAIN READINESS</h2><div class="dashboard" id="dashboard"></div><div class="notice">Readiness is deliberately conservative: a Tier 1 card counts as mastered only after repeated Good/Easy retrieval. Tap a domain to jump into its reference set.</div></section>
+
+<section class="panel" id="trainer"><h2>ACTIVE RECALL TRAINER</h2>
+<div class="controls"><button class="modebtn" data-mode="cold" onclick="setMode('cold')">Cold Recall</button><button class="modebtn" data-mode="reverse" onclick="setMode('reverse')">Reverse Recall</button><button class="modebtn" data-mode="contrast" onclick="setMode('contrast')">Trial ↔ Trial</button></div>
+<div id="studyArea"></div><div class="notice">Again/Hard automatically queues the first linked contrast trial. The tool does not pretend to infer your free-text misconception.</div></section>
+
+
+<section class="panel">
+  <h2>AUDIO DRILL</h2>
+  <div class="audio-launch">
+    <span>Eyes-free mixed recall. Hear the clinical/evidence cue, then say or spell the trial name.</span>
+    <button onclick="startAudioDrill()">🎧 Name That Trial</button>
+  </div>
+</section>
+
+<section class="panel refpanel collapsed" id="refSection">
+<div class="refheader" onclick="toggleReferenceSection()">
+  <h2>REVIEW TRIALS REFERENCE <span style="color:#77879d;font-weight:500;font-size:.72rem">· tap to expand</span></h2>
+  <span class="refchev" aria-hidden="true">▾</span>
+</div>
+<div class="refbody">
+<div class="controls"><button class="chip active" data-f="all" onclick="tierFilter('all')">All</button><button class="chip" data-f="1" onclick="tierFilter('1')">Tier 1</button><button class="chip" data-f="2" onclick="tierFilter('2')">Tier 2</button><button class="chip" data-f="3" onclick="tierFilter('3')">Tier 3</button></div><div class="countline" id="filterLabel">All trials</div><div class="triallist" id="trialList"></div></div></section>
+
+<section class="panel"><h2>VERIFICATION SOURCES</h2><p class="notice">Primary/official sources used to anchor the current exam date, recent reading-list priorities, and representative landmark/current trial records. This is a board-review tool, not a substitute for full guideline review.</p><div class="sourcegrid"><a target="_blank" rel="noopener" href="https://www.abpn.com/become-certified/taking-a-subspecialty-exam/neurocritical-care/">ABPN Neurocritical Care exam page</a>
+<a target="_blank" rel="noopener" href="https://www.ucns.org/common/Uploaded%20files/Continuous%20Certification/2026%20NCC%20C-cert%20Reading%20List.pdf">UCNS 2026 Neurocritical Care reading list</a>
+<a target="_blank" rel="noopener" href="https://jamanetwork.com/journals/jama/fullarticle/2824930">TRAIN, JAMA 2024</a>
+<a target="_blank" rel="noopener" href="https://jamanetwork.com/journals/jamaneurology/fullarticle/2806583">EARLYDRAIN, JAMA Neurology 2023</a>
+<a target="_blank" rel="noopener" href="https://www.nejm.org/doi/full/10.1056/NEJMoa2308440">ENRICH, NEJM 2024</a>
+<a target="_blank" rel="noopener" href="https://www.nejm.org/doi/full/10.1056/NEJMoa2313040">ANNEXA-I, NEJM 2024</a>
+<a target="_blank" rel="noopener" href="https://www.nejm.org/doi/full/10.1056/NEJMoa1905795">ESETT, NEJM 2019</a>
+<a target="_blank" rel="noopener" href="https://www.nejm.org/doi/full/10.1056/NEJMoa1107494">RAMPART, NEJM 2012</a>
+<a target="_blank" rel="noopener" href="https://www.nejm.org/doi/full/10.1056/NEJMoa1102077">DECRA, NEJM 2011</a>
+<a target="_blank" rel="noopener" href="https://www.nejm.org/doi/full/10.1056/NEJMoa1507581">EUROTHERM3235, NEJM 2015</a>
+<a target="_blank" rel="noopener" href="https://www.nejm.org/doi/full/10.1056/NEJMoa1310519">TTM 2013, NEJM</a>
+<a target="_blank" rel="noopener" href="https://www.nejm.org/doi/full/10.1056/NEJMoa2100591">TTM2, NEJM 2021</a>
+<a target="_blank" rel="noopener" href="https://www.bmj.com/content/298/6674/636">British aneurysm nimodipine trial, BMJ 1989</a></div></section>
+<div class="foot">Progress is stored only in this browser via localStorage. <button class="jump" onclick="resetProgress()">Reset progress</button></div>
+</div>
+
+<div class="fabstack">
+<button class="fab fsearch" onclick="openSearch()" aria-label="Search">🔍 Search</button>
+<button class="fab faction" onclick="collapseAll()" aria-label="Collapse all">Collapse all</button>
+<button class="fab ftop" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})" aria-label="Top">Top</button>
+</div>
+
+
+<div class="audioPanel" id="audioPanel">
+  <div class="audtop">
+    <div class="audtitle">🎧 NAME THAT TRIAL</div>
+    <div class="audstatus" id="audStatus">READY</div>
+  </div>
+  <div class="audq" id="audQ"></div>
+  <div class="audheard" id="audHeard"></div>
+  <div class="audfeedback" id="audFeedback"></div>
+  <div class="audcontrols">
+    <button class="audbtn" id="listenBtn" onclick="audioListen()">🎙 Listen</button>
+    <button class="audbtn" onclick="audioManual(true)">✓ Correct</button>
+    <button class="audbtn" onclick="audioManual(false)">✕ Wrong</button>
+    <button class="audbtn" onclick="audioSkip()">Skip</button>
+    <button class="audbtn" onclick="stopAudioDrill()">Stop</button>
+  </div>
+</div>
+
+<div class="overlay" id="searchOverlay" onclick="if(event.target===this)closeSearch()"><div class="modal">
+<div class="modalhead"><h2>🔍 SEARCH — TRIALS & CONCEPTS</h2><button class="close" onclick="closeSearch()">×</button></div>
+<div class="searchline"><input id="searchInput" placeholder="Try: fig... kidding. Try: basilar, alteplase, ICP 25, lobar, hypothermia…" oninput="search(this.value)"></div>
+<div class="countline" id="searchCount">Type a trial, disease, drug, number, intervention, result, or trap.</div><div class="results" id="searchResults"></div>
+</div></div>
+
+<script>
+const TRIALS = [{"id": "ninds", "name": "NINDS rt-PA", "domain": "Ischemic Stroke", "tier": 1, "year": 1995, "question": "Does IV alteplase improve outcome when given within 3 hours of acute ischemic stroke?", "population": "Acute ischemic stroke treated within 3 h; CT excludes hemorrhage.", "intervention": "IV alteplase 0.9 mg/kg vs placebo.", "result": "More minimal/no disability at 3 months despite more symptomatic ICH.", "bottom": "Foundation trial for IV alteplase. Benefit is strongly time dependent.", "trap": "Do not confuse the original ≤3 h evidence base with ECASS III or imaging-selected wake-up/late-window thrombolysis.", "contrast": "ECASS III|WAKE-UP|EXTEND", "tags": "alteplase tpa thrombolysis 3 hours"}, {"id": "ecass3", "name": "ECASS III", "domain": "Ischemic Stroke", "tier": 2, "year": 2008, "question": "Can alteplase help selected patients treated 3–4.5 hours after stroke onset?", "population": "Selected acute ischemic stroke, 3–4.5 h from onset.", "intervention": "IV alteplase vs placebo.", "result": "Improved functional outcome; more symptomatic ICH.", "bottom": "Classic evidence extending IV alteplase to 4.5 h in selected patients.", "trap": "Historical exclusions were stricter than many modern criteria.", "contrast": "NINDS rt-PA|WAKE-UP", "tags": "alteplase 4.5 hours"}, {"id": "wakeup", "name": "WAKE-UP", "domain": "Ischemic Stroke", "tier": 1, "year": 2018, "question": "Can MRI tissue-clock selection identify unknown-onset stroke patients who benefit from alteplase?", "population": "Unknown-onset/wake-up stroke with DWI lesion and no matching FLAIR hyperintensity.", "intervention": "IV alteplase vs placebo.", "result": "Improved favorable 90-day functional outcome.", "bottom": "DWI-positive/FLAIR-negative mismatch can serve as a tissue clock.", "trap": "WAKE-UP = MRI DWI/FLAIR mismatch. EXTEND = perfusion mismatch.", "contrast": "EXTEND", "tags": "wake up dwi flair mri mismatch"}, {"id": "extend", "name": "EXTEND", "domain": "Ischemic Stroke", "tier": 1, "year": 2019, "question": "Can perfusion imaging select patients for alteplase beyond 4.5 hours?", "population": "Stroke 4.5–9 h or wake-up stroke with salvageable tissue on automated perfusion imaging.", "intervention": "IV alteplase vs placebo.", "result": "More excellent functional outcomes; more symptomatic ICH.", "bottom": "Perfusion mismatch can select some late-window patients for thrombolysis.", "trap": "EXTEND = perfusion mismatch; WAKE-UP = DWI/FLAIR mismatch.", "contrast": "WAKE-UP", "tags": "late window perfusion mismatch 9 hours"}, {"id": "mrclean", "name": "MR CLEAN", "domain": "Ischemic Stroke", "tier": 1, "year": 2015, "question": "Does endovascular therapy improve outcome for proximal anterior-circulation LVO?", "population": "Proximal anterior-circulation LVO treated within 6 h.", "intervention": "EVT plus usual care vs usual care.", "result": "Shift toward better 90-day functional outcomes.", "bottom": "Pivotal modern thrombectomy trial establishing early-window LVO benefit.", "trap": "Think early LVO proof-of-benefit, not late-window tissue selection.", "contrast": "DAWN|DEFUSE 3", "tags": "evt thrombectomy lvo 6 hours"}, {"id": "dawn", "name": "DAWN", "domain": "Ischemic Stroke", "tier": 1, "year": 2018, "question": "Can clinical-core mismatch identify patients for thrombectomy 6–24 hours after last known well?", "population": "ICA/proximal MCA LVO 6–24 h with small core disproportionate to age/NIHSS.", "intervention": "Thrombectomy plus standard care vs standard care.", "result": "Large improvement in disability outcomes.", "bottom": "DAWN = 6–24 h + clinical-core mismatch.", "trap": "DEFUSE 3 = 6–16 h + perfusion/core mismatch.", "contrast": "DEFUSE 3", "tags": "late window 24 hours clinical core mismatch"}, {"id": "defuse3", "name": "DEFUSE 3", "domain": "Ischemic Stroke", "tier": 1, "year": 2018, "question": "Does thrombectomy help 6–16 hours after last known well when perfusion imaging shows salvageable tissue?", "population": "Proximal anterior LVO 6–16 h with favorable core-to-penumbra mismatch.", "intervention": "EVT plus medical therapy vs medical therapy.", "result": "Improved function and lower mortality.", "bottom": "DEFUSE 3 = 6–16 h + perfusion mismatch.", "trap": "DAWN extends to 24 h and is remembered for clinical-core mismatch.", "contrast": "DAWN", "tags": "late window 16 hours perfusion mismatch"}, {"id": "select2", "name": "SELECT2", "domain": "Ischemic Stroke", "tier": 1, "year": 2023, "question": "Does thrombectomy benefit anterior-circulation LVO with a large ischemic core?", "population": "ICA/M1 LVO with large core, including ASPECTS 3–5 and/or large core volume, up to 24 h.", "intervention": "EVT plus medical care vs medical care.", "result": "Better functional outcome distribution with EVT.", "bottom": "Large established core no longer automatically excludes EVT in selected patients.", "trap": "Learn with ANGEL-ASPECT/TENSION as the large-core EVT cluster.", "contrast": "ANGEL-ASPECT|TENSION", "tags": "large core aspects 3 5 24 hours"}, {"id": "angelaspect", "name": "ANGEL-ASPECT", "domain": "Ischemic Stroke", "tier": 1, "year": 2023, "question": "Does EVT help anterior LVO with a large infarct core?", "population": "Anterior LVO with ASPECTS 3–5 or large core; within 24 h.", "intervention": "EVT plus medical management vs medical management.", "result": "Better 90-day functional outcome distribution; more ICH.", "bottom": "Major positive large-core thrombectomy trial.", "trap": "Pair with SELECT2/TENSION rather than memorizing isolated percentages.", "contrast": "SELECT2|TENSION", "tags": "large core china aspects"}, {"id": "tension", "name": "TENSION", "domain": "Ischemic Stroke", "tier": 1, "year": 2023, "question": "Does EVT improve outcome in large infarction selected mainly by CT/MRI?", "population": "Anterior LVO with ASPECTS 3–5, treated up to 12 h.", "intervention": "EVT plus medical treatment vs medical treatment.", "result": "Improved function and lower mortality.", "bottom": "Pragmatic large-core EVT evidence using simple imaging selection.", "trap": "TENSION = large core, ASPECTS 3–5, pragmatic imaging.", "contrast": "SELECT2|ANGEL-ASPECT", "tags": "large core aspects 12 hours"}, {"id": "attention", "name": "ATTENTION", "domain": "Ischemic Stroke", "tier": 1, "year": 2022, "question": "Does thrombectomy improve outcome in acute basilar-artery occlusion within 12 hours?", "population": "Basilar artery occlusion, generally moderate-severe deficit, within 12 h.", "intervention": "EVT plus best medical care vs best medical care.", "result": "More good functional outcomes and lower mortality; more symptomatic ICH.", "bottom": "Positive early/intermediate-window basilar EVT trial.", "trap": "ATTENTION ≈ ≤12 h; BAOCHE = 6–24 h.", "contrast": "BAOCHE", "tags": "basilar thrombectomy posterior circulation 12 hours"}, {"id": "baoche", "name": "BAOCHE", "domain": "Ischemic Stroke", "tier": 1, "year": 2022, "question": "Does thrombectomy help basilar occlusion presenting 6–24 hours after onset?", "population": "Basilar artery occlusion 6–24 h after symptom onset.", "intervention": "EVT plus medical therapy vs medical therapy.", "result": "More good functional outcomes with EVT.", "bottom": "Late-window basilar thrombectomy evidence.", "trap": "BAOCHE = basilar + 6–24 h; ATTENTION = earlier.", "contrast": "ATTENTION", "tags": "basilar 24 hours"}, {"id": "escapemevo", "name": "ESCAPE-MeVO", "domain": "Ischemic Stroke", "tier": 1, "year": 2025, "question": "Does routine EVT improve outcome for acute medium-vessel occlusion?", "population": "Acute MeVO within 12 h, mostly MCA branch occlusions.", "intervention": "EVT plus usual care vs usual care.", "result": "No improvement in excellent 90-day outcome; safety signal unfavorable.", "bottom": "Current counterweight to EVT expansion: routine MeVO thrombectomy was not beneficial.", "trap": "Do not confuse with the positive 2015 ESCAPE LVO trial.", "contrast": "DISTAL", "tags": "mevo medium vessel 2025 negative"}, {"id": "distal", "name": "DISTAL", "domain": "Ischemic Stroke", "tier": 2, "year": 2025, "question": "Does EVT improve disability for medium/distal-vessel occlusion?", "population": "Medium/distal cerebral vessel occlusion with trial-specific imaging/time criteria.", "intervention": "EVT plus best medical therapy vs best medical therapy.", "result": "No functional benefit of routine EVT.", "bottom": "Recent RCTs do not support automatic EVT extension to smaller distal vessels.", "trap": "Contrast current MeVO evidence with positive LVO, basilar, and large-core expansion.", "contrast": "ESCAPE-MeVO", "tags": "distal medium vessel 2025"}, {"id": "chance", "name": "CHANCE", "domain": "Ischemic Stroke", "tier": 2, "year": 2013, "question": "Does short-course aspirin + clopidogrel reduce recurrence after minor stroke/high-risk TIA?", "population": "Minor ischemic stroke or high-risk TIA treated within 24 h.", "intervention": "Aspirin + clopidogrel, then clopidogrel, vs aspirin.", "result": "Reduced recurrent stroke without significant major-bleeding increase in the trial.", "bottom": "Supports early short-course DAPT in appropriate minor noncardioembolic stroke/TIA.", "trap": "POINT used a broader international population and longer DAPT exposure with more major bleeding.", "contrast": "POINT", "tags": "dapt clopidogrel aspirin tia"}, {"id": "point", "name": "POINT", "domain": "Ischemic Stroke", "tier": 2, "year": 2018, "question": "Does aspirin + clopidogrel reduce ischemic events after minor stroke/high-risk TIA?", "population": "Minor ischemic stroke/high-risk TIA randomized within 12 h.", "intervention": "Clopidogrel + aspirin vs aspirin for 90 d.", "result": "Reduced major ischemic events but increased major hemorrhage.", "bottom": "Confirms early DAPT benefit while showing bleeding cost of prolonged exposure.", "trap": "Most net benefit is early; distinguish from CHANCE design.", "contrast": "CHANCE", "tags": "dapt bleeding 90 days"}, {"id": "interact2", "name": "INTERACT2", "domain": "Intracerebral Hemorrhage", "tier": 1, "year": 2013, "question": "Does early intensive BP lowering improve outcome in spontaneous ICH?", "population": "Spontaneous ICH within 6 h with elevated SBP.", "intervention": "Target SBP <140 vs <180 mmHg.", "result": "Primary dichotomous endpoint narrowly neutral; ordinal mRS favored intensive treatment; generally safe.", "bottom": "Supports smooth early BP lowering toward ~140 in appropriate patients.", "trap": "ATACH-2 used a more aggressive 110–139 target and was neutral with more renal adverse events.", "contrast": "ATACH-2", "tags": "ich blood pressure 140"}, {"id": "atach2", "name": "ATACH-2", "domain": "Intracerebral Hemorrhage", "tier": 1, "year": 2016, "question": "Does very intensive SBP reduction to 110–139 improve spontaneous ICH outcome?", "population": "Early spontaneous ICH with SBP ≥180.", "intervention": "SBP 110–139 vs 140–179, largely with nicardipine.", "result": "No reduction in death/disability; more renal adverse events.", "bottom": "More aggressive BP reduction is not necessarily better.", "trap": "INTERACT2 ≈ target <140 with favorable ordinal signal; ATACH-2 = 110–139 and neutral.", "contrast": "INTERACT2", "tags": "ich bp 110 139 nicardipine"}, {"id": "interact3", "name": "INTERACT3", "domain": "Intracerebral Hemorrhage", "tier": 1, "year": 2023, "question": "Does rapid implementation of a bundled protocol improve outcome in acute ICH?", "population": "Acute spontaneous ICH in a stepped-wedge hospital trial.", "intervention": "Bundle: early BP lowering plus glucose, fever, and anticoagulation management vs usual care.", "result": "Improved functional outcomes.", "bottom": "Modern ICH care is a bundle, not BP in isolation.", "trap": "INTERACT3 = system-of-care bundle; INTERACT2 = BP target trial.", "contrast": "INTERACT2", "tags": "ich bundle glucose fever reversal"}, {"id": "stich", "name": "STICH", "domain": "Intracerebral Hemorrhage", "tier": 1, "year": 2005, "question": "Does early open surgical evacuation improve outcome in spontaneous supratentorial ICH?", "population": "Spontaneous supratentorial ICH where benefit of surgery was uncertain.", "intervention": "Early craniotomy/evacuation vs conservative care.", "result": "No overall benefit from routine early surgery.", "bottom": "Routine open craniotomy did not improve outcome in unselected supratentorial ICH.", "trap": "Do not generalize to MISTIE or ENRICH; technique and selection differ.", "contrast": "MISTIE III|ENRICH", "tags": "ich surgery craniotomy"}, {"id": "stich2", "name": "STICH II", "domain": "Intracerebral Hemorrhage", "tier": 2, "year": 2013, "question": "Does early surgery help selected superficial lobar ICH without IVH?", "population": "Conscious patients with superficial lobar ICH, 10–100 mL, no IVH.", "intervention": "Early surgery vs conservative care.", "result": "No statistically significant overall functional benefit; possible survival signal.", "bottom": "Selection matters, but routine open surgery still not clearly proven beneficial.", "trap": "ENRICH later used minimally invasive evacuation and was positive in selected lobar ICH.", "contrast": "ENRICH", "tags": "lobar superficial ich"}, {"id": "mistie3", "name": "MISTIE III", "domain": "Intracerebral Hemorrhage", "tier": 1, "year": 2019, "question": "Does catheter-based minimally invasive evacuation plus alteplase improve function in moderate-large ICH?", "population": "Spontaneous supratentorial ICH generally ≥30 mL.", "intervention": "Image-guided catheter evacuation + low-dose alteplase vs medical care.", "result": "Neutral primary functional endpoint; lower mortality and better outcomes with greater clot reduction signals.", "bottom": "Technically effective clot reduction, but no prespecified functional benefit overall.", "trap": "MISTIE III ≠ ENRICH; ENRICH showed positive 180-day outcome in selected patients.", "contrast": "ENRICH|CLEAR III", "tags": "ich catheter alteplase minimally invasive"}, {"id": "enrich", "name": "ENRICH", "domain": "Intracerebral Hemorrhage", "tier": 1, "year": 2024, "question": "Does early minimally invasive trans-sulcal evacuation improve outcome in selected spontaneous ICH?", "population": "Lobar or anterior basal ganglia ICH 30–80 mL, randomized within 24 h; enrollment later restricted to lobar.", "intervention": "Early minimally invasive evacuation + medical care vs medical care.", "result": "Better 180-day utility-weighted mRS; benefit driven by lobar ICH; lower 30-day mortality.", "bottom": "Selected lobar ICH can benefit from early minimally invasive evacuation.", "trap": "Do not extrapolate benefit to deep basal-ganglia hemorrhage.", "contrast": "MISTIE III|STICH II", "tags": "lobar 30 80 ml 24 hours surgery"}, {"id": "clear3", "name": "CLEAR III", "domain": "Intracerebral Hemorrhage", "tier": 1, "year": 2017, "question": "Does intraventricular alteplase through an EVD improve outcome in ICH with obstructive IVH?", "population": "Small stable ICH with significant IVH obstructing 3rd/4th ventricle and EVD in place.", "intervention": "Intraventricular alteplase vs saline via EVD.", "result": "Neutral primary functional endpoint; lower mortality but more survivors with severe disability.", "bottom": "Clears IVH faster and may lower mortality, but did not improve the prespecified good-functional-outcome threshold.", "trap": "CLEAR III = IVH/EVD alteplase; MISTIE III = intraparenchymal catheter + alteplase.", "contrast": "MISTIE III", "tags": "ivh evd alteplase"}, {"id": "annexai", "name": "ANNEXA-I", "domain": "Intracerebral Hemorrhage", "tier": 1, "year": 2024, "question": "Does andexanet improve hemostatic efficacy in factor-Xa inhibitor-associated acute ICH?", "population": "Acute ICH after recent factor Xa inhibitor exposure.", "intervention": "Andexanet alfa vs usual care, mostly PCC.", "result": "Better hemostatic efficacy and hematoma control, but more thrombotic events including ischemic stroke; no clear 30-day functional/mortality benefit.", "bottom": "Andexanet improves hemostatic control but has a clinically important thrombosis tradeoff.", "trap": "ANNEXA-I is randomized ICH evidence; ANNEXA-4 was single-arm major bleeding.", "contrast": "ANNEXA-4", "tags": "factor xa reversal andexanet pcc"}, {"id": "nimodipine", "name": "British Aneurysm Nimodipine Trial", "domain": "Subarachnoid Hemorrhage", "tier": 1, "year": 1989, "question": "Does oral nimodipine reduce infarction and poor outcome after aneurysmal SAH?", "population": "Patients with aneurysmal SAH.", "intervention": "Oral nimodipine vs placebo.", "result": "Reduced cerebral infarction and poor outcome.", "bottom": "Landmark basis for routine enteral nimodipine after aSAH.", "trap": "Benefit is clinical; nimodipine is not simply a macrovasospasm drug.", "contrast": "CONSCIOUS-1", "tags": "sah nimodipine delayed cerebral ischemia"}, {"id": "earlydrain", "name": "EARLYDRAIN", "domain": "Subarachnoid Hemorrhage", "tier": 1, "year": 2023, "question": "Does prophylactic lumbar CSF drainage improve outcome after aneurysmal SAH?", "population": "aSAH patients after aneurysm treatment; lumbar drain started early in appropriate patients.", "intervention": "Early lumbar CSF drainage + standard care vs standard care.", "result": "Less unfavorable 6-month outcome and fewer secondary infarctions.", "bottom": "Modern aSAH evidence supporting early lumbar drainage in selected patients.", "trap": "Know contraindications/anatomy; this is not a license to lumbar-drain obstructive hydrocephalus indiscriminately.", "contrast": "", "tags": "sah lumbar drain 2023"}, {"id": "conscious1", "name": "CONSCIOUS-1", "domain": "Subarachnoid Hemorrhage", "tier": 2, "year": 2008, "question": "Can clazosentan reduce angiographic vasospasm after aneurysmal SAH?", "population": "Aneurysmal SAH after securing aneurysm.", "intervention": "Clazosentan vs placebo.", "result": "Reduced angiographic vasospasm but did not establish corresponding functional benefit.", "bottom": "Classic lesson: improving angiographic vasospasm does not guarantee better clinical outcome.", "trap": "Contrast with nimodipine, which improves clinical outcome despite limited effect on angiographic vasospasm.", "contrast": "British Aneurysm Nimodipine Trial", "tags": "clazosentan vasospasm"}, {"id": "decra", "name": "DECRA", "domain": "Traumatic Brain Injury / ICP", "tier": 1, "year": 2011, "question": "Does early bifrontotemporoparietal decompressive craniectomy help diffuse TBI with refractory ICP?", "population": "Severe diffuse TBI with relatively early/modest refractory ICP elevation.", "intervention": "Bifrontal decompressive craniectomy + standard care vs standard care.", "result": "Lowered ICP and ICU time but produced worse functional outcome distribution in the primary analysis.", "bottom": "Decompression can control ICP without guaranteeing good neurologic outcome.", "trap": "DECRA = lower ICP threshold/earlier decompression; RESCUEicp = later, more refractory ICP >25 with mortality benefit tradeoff.", "contrast": "RESCUEicp", "tags": "tbi decompressive craniectomy"}, {"id": "rescueicp", "name": "RESCUEicp", "domain": "Traumatic Brain Injury / ICP", "tier": 1, "year": 2016, "question": "Does decompressive craniectomy improve outcome in severe TBI with late refractory intracranial hypertension?", "population": "Severe TBI with ICP >25 mmHg for 1–12 h despite tiered therapy.", "intervention": "Decompressive craniectomy vs continued medical therapy.", "result": "Lower mortality but more survivors across disability categories; at later follow-up more favorable outcomes emerged.", "bottom": "For refractory ICP, decompression is life-saving but shifts the survival/disability distribution.", "trap": "Contrast with DECRA's earlier/lower-threshold population and worse primary functional result.", "contrast": "DECRA", "tags": "tbi icp 25 decompression"}, {"id": "eurotherm", "name": "EUROTHERM3235", "domain": "Traumatic Brain Injury / ICP", "tier": 1, "year": 2015, "question": "Does therapeutic hypothermia improve outcomes when used to treat intracranial hypertension after TBI?", "population": "TBI with ICP >20 mmHg despite stage-1 therapy.", "intervention": "Hypothermia 32–35°C + standard care vs standard care.", "result": "Hypothermia controlled ICP but worsened functional outcomes; trial stopped early.", "bottom": "Do not use prophylactic/ICP-directed hypothermia expecting neurologic benefit in TBI.", "trap": "Physiologic ICP improvement can coexist with worse patient-centered outcome.", "contrast": "", "tags": "tbi hypothermia 32 35 icp 20"}, {"id": "crash", "name": "CRASH", "domain": "Traumatic Brain Injury / ICP", "tier": 1, "year": 2004, "question": "Do high-dose corticosteroids improve outcome after significant TBI?", "population": "Adults with clinically significant head injury within 8 h.", "intervention": "48-h methylprednisolone infusion vs placebo.", "result": "Higher mortality with corticosteroids.", "bottom": "Steroids are harmful in acute TBI.", "trap": "Do not transfer steroid benefit from spinal cord compression/other inflammatory conditions to TBI.", "contrast": "", "tags": "tbi steroids methylprednisolone mortality"}, {"id": "crash3", "name": "CRASH-3", "domain": "Traumatic Brain Injury / ICP", "tier": 1, "year": 2019, "question": "Does early tranexamic acid reduce head-injury death after TBI?", "population": "TBI within 3 h, GCS ≤12 or intracranial bleeding, without major extracranial bleeding.", "intervention": "TXA vs placebo.", "result": "Overall primary effect modest; signal of reduced head-injury death in mild-moderate TBI when treated early, not severe unsurvivable injury.", "bottom": "If TXA is used for isolated TBI, early treatment and injury severity matter.", "trap": "Do not overstate as a universal mortality benefit for all severe TBI.", "contrast": "", "tags": "tbi txa tranexamic acid 3 hours"}, {"id": "besttrip", "name": "BEST:TRIP", "domain": "Traumatic Brain Injury / ICP", "tier": 2, "year": 2012, "question": "Is an ICP-monitor-driven protocol superior to management based on serial imaging and examination in severe TBI?", "population": "Severe TBI in centers in Bolivia/Ecuador.", "intervention": "Protocol based on ICP monitor vs imaging/clinical-exam-based protocol.", "result": "No significant superiority of the ICP-monitor protocol for the composite primary outcome.", "bottom": "The trial questioned protocol superiority, not the physiologic validity of ICP or all indications for monitoring.", "trap": "Do not misread as 'ICP monitoring is useless.'", "contrast": "", "tags": "tbi icp monitor"}, {"id": "rampart", "name": "RAMPART", "domain": "Status Epilepticus", "tier": 1, "year": 2012, "question": "Is IM midazolam at least as effective as IV lorazepam for prehospital status epilepticus?", "population": "Children/adults with convulsive status treated by paramedics.", "intervention": "IM midazolam vs IV lorazepam.", "result": "IM midazolam was noninferior and achieved seizure cessation without rescue therapy more often, largely due to faster administration.", "bottom": "When IV access delays therapy, IM midazolam is an evidence-based first-line route.", "trap": "Route logistics matter: faster IM delivery can beat slower IV access.", "contrast": "", "tags": "status benzodiazepine midazolam lorazepam"}, {"id": "esett", "name": "ESETT", "domain": "Status Epilepticus", "tier": 1, "year": 2019, "question": "Which second-line drug is best after benzodiazepine-refractory convulsive status?", "population": "Benzodiazepine-refractory convulsive status epilepticus.", "intervention": "IV levetiracetam vs fosphenytoin vs valproate.", "result": "No meaningful efficacy difference; seizure cessation + improved consciousness at 60 min occurred in ~45–47% with each.", "bottom": "Levetiracetam, fosphenytoin, and valproate are all reasonable established-status options; none clearly superior overall.", "trap": "The memorable number is roughly half respond, not a winning drug.", "contrast": "", "tags": "status levetiracetam fosphenytoin valproate 50 percent"}, {"id": "ttm2013", "name": "TTM (2013)", "domain": "Cardiac Arrest / HIE", "tier": 1, "year": 2013, "question": "Is 33°C superior to 36°C after out-of-hospital cardiac arrest?", "population": "Comatose OHCA survivors of presumed cardiac cause.", "intervention": "Targeted temperature 33°C vs 36°C.", "result": "No mortality or neurologic-outcome difference.", "bottom": "The key shift was from 'must cool to 33' toward strict temperature control/fever prevention.", "trap": "TTM2 later compared 33°C with targeted normothermia/fever treatment.", "contrast": "TTM2", "tags": "cardiac arrest temperature 33 36"}, {"id": "ttm2", "name": "TTM2", "domain": "Cardiac Arrest / HIE", "tier": 1, "year": 2021, "question": "Does hypothermia at 33°C improve outcome over targeted normothermia with fever treatment after OHCA?", "population": "1900 comatose OHCA survivors of presumed cardiac/unknown cause.", "intervention": "33°C hypothermia vs normothermia with treatment of fever ≥37.8°C.", "result": "No benefit in 6-month mortality or functional outcome; more arrhythmias with hemodynamic compromise in hypothermia arm.", "bottom": "Modern default is active fever prevention/temperature control, not routine deep hypothermia for all OHCA survivors.", "trap": "Do not confuse with HYPERION's nonshockable-rhythm population and 33 vs 37°C comparison.", "contrast": "HYPERION|TTM (2013)", "tags": "cardiac arrest normothermia fever 37.8"}, {"id": "hyperion", "name": "HYPERION", "domain": "Cardiac Arrest / HIE", "tier": 1, "year": 2019, "question": "Does 33°C targeted temperature management improve neurologic outcome after nonshockable cardiac arrest?", "population": "Comatose survivors of cardiac arrest with nonshockable rhythm.", "intervention": "33°C for 24 h vs targeted normothermia around 37°C.", "result": "Small absolute increase in favorable neurologic outcome at 90 d; no mortality difference.", "bottom": "Important positive signal in nonshockable arrest, but interpretation now sits alongside larger TTM2 evidence.", "trap": "HYPERION = nonshockable rhythms; TTM2 = broader OHCA and no benefit of 33°C over fever prevention.", "contrast": "TTM2", "tags": "nonshockable arrest hypothermia"}, {"id": "tth48", "name": "TTM 48 vs 24", "domain": "Cardiac Arrest / HIE", "tier": 3, "year": 2017, "question": "Does cooling to 33°C for 48 h outperform 24 h after cardiac arrest?", "population": "Comatose OHCA survivors treated with 33°C TTM.", "intervention": "48 h vs 24 h at 33°C.", "result": "Did not significantly improve favorable neurologic outcome; more adverse events with longer cooling.", "bottom": "Longer cooling is not clearly better.", "trap": "Lower priority than TTM/TTM2/HYPERION.", "contrast": "", "tags": "48 hour cooling"}, {"id": "train", "name": "TRAIN", "domain": "General Neurocritical Care", "tier": 1, "year": 2024, "question": "Should anemia in acute brain injury be managed with a liberal or restrictive transfusion threshold?", "population": "Acute brain injury (TBI, aSAH, ICH) with Hb <9 g/dL.", "intervention": "Transfuse at Hb <9 vs Hb <7 g/dL.", "result": "Liberal strategy reduced unfavorable neurologic outcome at 180 days and cerebral ischemic events.", "bottom": "Important current trial: acute brain injury may be different from generic ICU restrictive-transfusion practice.", "trap": "Do not automatically import a Hb 7 threshold from general ICU trials into every acute brain injury patient.", "contrast": "HEMOTION", "tags": "transfusion hemoglobin 9 7 brain injury"}, {"id": "hemotion", "name": "HEMOTION", "domain": "General Neurocritical Care", "tier": 2, "year": 2024, "question": "Does a liberal transfusion strategy improve outcome specifically in moderate-severe TBI?", "population": "Moderate/severe TBI with anemia.", "intervention": "Transfuse at Hb ≤10 vs ≤7 g/dL.", "result": "Did not significantly reduce unfavorable neurologic outcome on the primary endpoint, although several secondary outcomes favored liberal strategy.", "bottom": "TBI-specific trial was not definitively positive on its primary endpoint; interpret beside TRAIN.", "trap": "TRAIN was broader acute brain injury and positive at 9 vs 7.", "contrast": "TRAIN", "tags": "tbi transfusion 10 7"}, {"id": "pe_sid", "name": "PE-SID / Plasma Exchange GBS Cooperative Study", "domain": "Neuromuscular / Infection", "tier": 2, "year": 1985, "question": "Does plasma exchange accelerate recovery in severe Guillain-Barré syndrome?", "population": "Severe GBS with major weakness, many nonambulatory.", "intervention": "Plasma exchange vs supportive care.", "result": "Accelerated recovery and improved outcomes.", "bottom": "Plasma exchange is an effective disease-modifying therapy in GBS.", "trap": "IVIG later became an equally effective alternative; combining sequentially is not routinely superior.", "contrast": "IVIG vs PE", "tags": "gbs plasma exchange"}, {"id": "ivigpe", "name": "IVIG vs Plasma Exchange in GBS", "domain": "Neuromuscular / Infection", "tier": 2, "year": 1992, "question": "Is IVIG as effective as plasma exchange in severe GBS?", "population": "Severe GBS requiring disease-modifying therapy.", "intervention": "IVIG vs plasma exchange.", "result": "IVIG had similar efficacy and was easier to administer.", "bottom": "IVIG and plasma exchange are accepted first-line disease-modifying therapies.", "trap": "Steroids alone are not effective disease-modifying treatment for GBS.", "contrast": "Plasma Exchange GBS Cooperative Study", "tags": "gbs ivig plasma"}, {"id": "dexa_meningitis", "name": "Dexamethasone in Adult Bacterial Meningitis", "domain": "Neuromuscular / Infection", "tier": 2, "year": 2002, "question": "Does adjunctive dexamethasone improve outcome in adult bacterial meningitis?", "population": "Adults with suspected/confirmed acute bacterial meningitis.", "intervention": "Dexamethasone started before/with first antibiotic dose vs placebo.", "result": "Reduced unfavorable outcome and mortality, especially in pneumococcal meningitis.", "bottom": "Give dexamethasone before or with the first antibiotic dose when bacterial meningitis is suspected and indications are met.", "trap": "Timing matters; late dexamethasone after antibiotics is not the same intervention.", "contrast": "", "tags": "meningitis dexamethasone pneumococcal"}, {"id": "respects", "name": "RESPECT-CVT", "domain": "Cerebral Venous / Other", "tier": 2, "year": 2019, "question": "Is dabigatran a reasonable alternative to warfarin after acute cerebral venous thrombosis?", "population": "Stable CVT patients after initial parenteral anticoagulation.", "intervention": "Dabigatran vs warfarin.", "result": "Low recurrent VTE rates in both groups; similar major bleeding.", "bottom": "Supports DOAC feasibility in selected CVT, though trial was small.", "trap": "Acute unstable CVT/endovascular questions are different from maintenance anticoagulation.", "contrast": "SECRET", "tags": "cvt dabigatran warfarin"}, {"id": "secret", "name": "SECRET", "domain": "Cerebral Venous / Other", "tier": 3, "year": 2023, "question": "Is rivaroxaban feasible/safe compared with standard anticoagulation in CVT?", "population": "Symptomatic cerebral venous thrombosis.", "intervention": "Rivaroxaban vs standard anticoagulation.", "result": "Small feasibility trial; event rates were low and conclusions limited.", "bottom": "Adds to DOAC evidence but is not a dominant board trial.", "trap": "Keep lower tier than core stroke/ICH/TBI trials.", "contrast": "RESPECT-CVT", "tags": "cvt rivaroxaban"}, {"id": "annexa4", "name": "ANNEXA-4", "domain": "Intracerebral Hemorrhage", "tier": 3, "year": 2019, "question": "How effective is andexanet alfa for acute major bleeding from factor Xa inhibitors?", "population": "Major bleeding after factor Xa inhibitor exposure; many intracranial bleeds.", "intervention": "Single-arm andexanet alfa cohort.", "result": "Marked anti-Xa reduction and high adjudicated hemostatic efficacy, with thrombosis risk.", "bottom": "Important background evidence but ANNEXA-I is the randomized ICH trial to prioritize.", "trap": "Do not treat ANNEXA-4 as randomized comparative evidence.", "contrast": "ANNEXA-I", "tags": "andexanet single arm"}];
+const KEY='nccTrialLockdownV1';
+let S=JSON.parse(localStorage.getItem(KEY)||'{}');
+if(!S.cards)S.cards={}; if(!S.queue)S.queue=[]; if(!S.mode)S.mode='cold'; if(!S.filter)S.filter='all'; if(!S.history)S.history=[];
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+function esc(s){return (s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function due(t){let c=S.cards[t.id]; return !c||!c.next||c.next<=Date.now()}
+function mastered(t){let c=S.cards[t.id]; return c && (c.good||0)>=2 && (c.lastGrade==='good'||c.lastGrade==='easy')}
+function readiness(domain){let ts=TRIALS.filter(t=>t.domain===domain&&t.tier===1); if(!ts.length)return 0; return Math.round(100*ts.filter(mastered).length/ts.length)}
+function stats(){let t1=TRIALS.filter(t=>t.tier===1); $('#sTotal').textContent=TRIALS.length;$('#sT1').textContent=t1.length;$('#sDue').textContent=t1.filter(due).length;$('#sMaster').textContent=t1.filter(mastered).length}
+function renderDash(){
+ let ds=[...new Set(TRIALS.map(t=>t.domain))]; $('#dashboard').innerHTML=ds.map(d=>{let p=readiness(d);return `<div class="drow" onclick="filterDomain('${d.replaceAll("'","\\'")}')"><span>${esc(d)}</span><div class="bar"><div class="fill" style="width:${p}%"></div></div><span class="pct">${p}%</span></div>`}).join('')
+}
+function renderTrials(list=TRIALS){
+ $('#trialList').innerHTML=list.map(t=>`<article class="trial t${t.tier}" id="${t.id}">
+ <div class="trialhead"><div><h3>${esc(t.name)}</h3><div class="meta">${esc(t.domain)} · ${t.year}</div></div><span class="tier">TIER ${t.tier}</span></div>
+ <div class="fields">
+  <div class="field"><div class="label">Question</div><p>${esc(t.question)}</p></div>
+  <div class="field"><div class="label">Population</div><p>${esc(t.population)}</p></div>
+  <div class="field"><div class="label">Intervention / Comparator</div><p>${esc(t.intervention)}</p></div>
+  <div class="field"><div class="label">Result</div><p>${esc(t.result)}</p></div>
+  <div class="field bottom"><div class="label">Board Bottom Line</div><p>${esc(t.bottom)}</p></div>
+  <div class="field trap"><div class="label">Trap / Contrast</div><p>${esc(t.trap)}${t.contrast?`<br><span style="color:#8fcfff">Contrast: ${esc(t.contrast)}</span>`:''}</p></div>
+ </div></article>`).join('')
+}
+function filterDomain(d){
+ toggleReferenceSection(true);
+ $('#refSection').scrollIntoView({behavior:'smooth',block:'start'});
+ $$('.chip').forEach(x=>x.classList.remove('active'));
+ renderTrials(TRIALS.filter(t=>t.domain===d));
+ $('#filterLabel').textContent='Domain: '+d
+}
+function tierFilter(v){S.filter=v;save();$$('.chip').forEach(x=>x.classList.toggle('active',x.dataset.f===v));let list=v==='all'?TRIALS:TRIALS.filter(t=>String(t.tier)===v);renderTrials(list);$('#filterLabel').textContent=v==='all'?'All trials':'Tier '+v}
+function search(q){
+ q=q.trim(); let box=$('#searchResults'),line=$('#searchCount'); if(!q){box.innerHTML='';line.textContent='Type a trial, disease, drug, number, intervention, result, or trap.';return}
+ let terms=q.toLowerCase().split(/\s+/).filter(Boolean);
+ let hits=TRIALS.map(t=>{let blob=[t.name,t.domain,t.year,t.question,t.population,t.intervention,t.result,t.bottom,t.trap,t.contrast,t.tags].join(' ').toLowerCase();let score=terms.reduce((a,x)=>a+(blob.includes(x)?1:0),0);return {t,score,blob}}).filter(x=>x.score===terms.length).sort((a,b)=>b.score-a.score||a.t.tier-b.t.tier);
+ line.textContent=`${hits.length} match${hits.length===1?'':'es'} across ${new Set(hits.map(x=>x.t.domain)).size} section${new Set(hits.map(x=>x.t.domain)).size===1?'':'s'}.`;
+ const hi=s=>{let z=esc(s);terms.forEach(term=>{z=z.replace(new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`,'ig'),'<mark class="hl">$1</mark>')});return z}
+ box.innerHTML=hits.map(({t})=>`<div class="result" onclick="goTrial('${t.id}')"><div class="rdom">${esc(t.domain)} · TIER ${t.tier}</div><div class="rtitle">${hi(t.name)}</div><div class="rsnip">${hi((t.bottom+' '+t.trap).slice(0,240))}</div></div>`).join('')||'<div class="notice">No matches.</div>'
+}
+function openSearch(){ $('#searchOverlay').classList.add('open');setTimeout(()=>$('#searchInput').focus(),50)}
+function closeSearch(){ $('#searchOverlay').classList.remove('open')}
+function goTrial(id){
+ closeSearch();
+ tierFilter('all');
+ toggleReferenceSection(true);
+ setTimeout(()=>{
+   const el=document.getElementById(id);
+   if(el){
+     el.classList.add('open');
+     el.scrollIntoView({behavior:'smooth',block:'start'});
+   }
+ },100)
+}
+function openMenu(){document.getElementById('toc').scrollIntoView({behavior:'smooth'})}
+
+let currentStudyId=null;
+
+function toggleMemory(){document.getElementById('memoryTools')?.classList.toggle('open')}
+
+function resetCurrentCard(){
+ if(!currentStudyId){alert('No active study card to reset.');return}
+ const t=TRIALS.find(x=>x.id===currentStudyId);
+ if(!confirm(`Reset progress for ${t?t.name:'this card'}?`)) return;
+ delete S.cards[currentStudyId];
+ S.queue=S.queue.filter(x=>x!==currentStudyId);
+ S.history.push({ts:Date.now(),type:'reset-card',id:currentStudyId});
+ save();stats();renderDash();startStudy();
+}
+
+function resetLastHour(){
+ const cutoff=Date.now()-3600000;
+ const recent=(S.history||[]).filter(h=>h.ts>=cutoff && h.type==='grade');
+ if(!recent.length){alert('No graded cards from the last hour to reset.');return}
+ if(!confirm(`Reset ${recent.length} grading action${recent.length===1?'':'s'} from the last hour?`)) return;
+ // restore snapshots in reverse chronological order
+ [...recent].sort((a,b)=>b.ts-a.ts).forEach(h=>{
+   if(h.prev==null) delete S.cards[h.id];
+   else S.cards[h.id]=h.prev;
+ });
+ S.history=(S.history||[]).filter(h=>!(h.ts>=cutoff && h.type==='grade'));
+ // clear queued remediation added during that period to avoid stale pair carryover
+ S.queue=[];
+ save();stats();renderDash();startStudy();
+}
+
+function resetFullMemory(){
+ if(!confirm('Reset ALL study memory, grades, intervals, readiness, and queued contrasts for this trainer?')) return;
+ S={cards:{},queue:[],mode:S.mode||'cold',filter:'all',history:[]};
+ save();stats();renderDash();startStudy();
+}
+
+const STOPWORDS=new Set(`the a an and or of to in on for with without vs versus from by at as is are was were be been being this that these those it its into within after before during when which who what does did do can could should would trial patients patient acute outcome outcomes treatment treated therapy care standard usual group groups intervention comparator primary endpoint functional function improve improved benefit benefits worse better more less higher lower major clinical board study randomized randomised`.split(/\s+/));
+const SYN={
+  "similar":["equivalent","same","no difference","noninferior","non-inferior"],
+  "difference":["different","superior","inferior","same","similar","equivalent","no difference"],
+  "meaningful":["significant","statistically","clinically"],
+  "superior":["better","benefit","improved","positive"],
+  "neutral":["no benefit","no difference","similar","equivalent"],
+  "negative":["no benefit","harm","worse","failed"],
+  "thrombectomy":["evt","endovascular"],
+  "endovascular":["evt","thrombectomy"],
+  "alteplase":["tpa","rtpa","thrombolysis"],
+  "thrombolysis":["alteplase","tpa","rtpa"],
+  "hemorrhage":["ich","bleed","bleeding"],
+  "intracerebral":["ich"],
+  "intraventricular":["ivh"],
+  "subarachnoid":["sah"],
+  "midazolam":["versed"],
+  "lorazepam":["ativan"],
+  "levetiracetam":["keppra"],
+  "fosphenytoin":["cerebyx","phenytoin"],
+  "valproate":["valproic","depakote"],
+  "hypothermia":["cooling","33c","33"],
+  "normothermia":["fever","temperature"],
+  "craniectomy":["decompression","decompressive"],
+  "lumbar":["drain","csf"],
+  "andexanet":["andexxa"],
+  "pcc":["prothrombin","complex","concentrate"],
+  "dwi":["diffusion"],
+  "flair":["mri"],
+  "basilar":["posterior"],
+  "lobar":["cortical"]
+};
+function normWords(s){
+ return (s||'').toLowerCase().replace(/[^a-z0-9%]+/g,' ').split(/\s+/).filter(Boolean);
+}
+function anchors(text,n=3){
+ const words=normWords(text).filter(w=>w.length>2&&!STOPWORDS.has(w));
+ const freq={}; words.forEach(w=>freq[w]=(freq[w]||0)+1);
+ return Object.keys(freq).sort((a,b)=>freq[b]-freq[a]||b.length-a.length).slice(0,n);
+}
+function hasConcept(answer,word){
+ const raw=(answer||'').toLowerCase();
+ const aw=new Set(normWords(answer));
+ if(aw.has(word)) return true;
+ const syn=SYN[word]||[];
+ return syn.some(x=>{
+   if(x.includes(' ')) return raw.includes(x);
+   return aw.has(x);
+ });
+}
+function conceptCoverage(t,answer){
+ const groups=[
+   ['Population',anchors(t.population,3)],
+   ['Intervention',anchors(t.intervention,3)],
+   ['Result',anchors(t.result,3)],
+   ['Takeaway',anchors(t.bottom,3)]
+ ];
+ let hitCount=0,total=groups.length;
+ const items=groups.map(([label,keys])=>{
+   const hits=keys.filter(k=>hasConcept(answer,k));
+   const ok=hits.length>=Math.max(1,Math.ceil(keys.length/2));
+   if(ok)hitCount++;
+   return {label,ok,keys,hits};
+ });
+ let summary='';
+ if(hitCount===4) summary='Your answer covered all four major concept buckets.';
+ else if(hitCount===3) summary='Strong coverage. One concept bucket was thin or missing.';
+ else if(hitCount===2) summary='Partial coverage. Review the missing buckets before self-grading.';
+ else if(hitCount===1) summary='Limited coverage. Your answer hit one major bucket.';
+ else summary='Minimal keyword coverage detected. Compare your answer carefully with the reveal.';
+ return {hitCount,total,items,summary};
+}
+function coverageHTML(t,answer){
+ const c=conceptCoverage(t,answer);
+ const pct=Math.round((c.hitCount/c.total)*100);
+ const gold={
+   Population:t.population,
+   Intervention:t.intervention,
+   Result:t.result,
+   Takeaway:t.bottom
+ };
+ return `<div class="coverage">
+   <div class="coverage-title">Coverage check · not semantic grading</div>
+   <div class="coverage-score"><b>${pct}%</b> · ${c.hitCount}/${c.total} concept buckets hit. ${esc(c.summary)}</div>
+   <div class="coverage-grid">
+     ${c.items.map(i=>`
+       <div class="coverage-item ${i.ok?'hit':'miss'}">
+         <div><strong>${i.ok?'✓':'○'} ${i.label}</strong></div>
+         <div style="color:#8293a8;margin-top:3px">${i.ok?'Detected in your answer':'Not clearly detected'}</div>
+         <div style="color:#aebbc9;margin-top:4px;font-size:.66rem"><span style="color:#718398">Gold:</span> ${esc(gold[i.label]||'')}</div>
+       </div>`).join('')}
+   </div>
+   <div class="coverage-note">The percentage is only a rough coverage estimate. The cards now show the actual gold field instead of auto-generated keyword fragments, which were too noisy to be useful. Self-grade with Again / Hard / Good / Easy.</div>
+ </div>`;
+}
+
+function updateLiveCoverage(){
+ const t=TRIALS.find(x=>x.id===currentStudyId);
+ const ans=document.getElementById('typed')?.value||'';
+ const pctEl=document.getElementById('livePct');
+ const fill=document.getElementById('liveFill');
+ if(!t||!pctEl||!fill)return;
+ const c=conceptCoverage(t,ans);
+ const pct=Math.round((c.hitCount/c.total)*100);
+ pctEl.textContent=pct+'%';
+ fill.style.width=pct+'%';
+}
+
+function renderCoverage(t){
+ const ans=document.getElementById('typed')?.value||'';
+ const slot=document.getElementById('coverageSlot');
+ if(slot)slot.innerHTML=coverageHTML(t,ans);
+}
+
+
+
+function trialVerdict(t){
+ let s=((t.result||'')+' '+(t.bottom||'')).toLowerCase();
+ if(/\bharm|worse|increased mortality|no benefit|did not improve|not superior|neutral|no significant difference/.test(s)) return 'NEUTRAL / NEGATIVE';
+ if(/\bimprov|benefit|superior|reduced|better|positive/.test(s)) return 'POSITIVE';
+ return 'CONTEXT';
+}
+
+/* ---------- Audio Name-That-Trial drill ---------- */
+let AUDIO={running:false,current:null,pool:[],recognition:null,listening:false,timer:null};
+
+function trialAliases(t){
+ let n=(t.name||'').toLowerCase();
+ let a=[n];
+ const custom={
+  'DEFUSE 3':['defuse 3','defuse three','d fuse three','d fuse 3'],
+  'RESCUEicp':['rescue icp','rescue i c p','rescue intracranial pressure','rescue-icp'],
+  'ESETT':['esett','e sett','e set','e s e t t'],
+  'RAMPART':['rampart'],
+  'TTM2':['ttm2','ttm 2','ttm two','t t m 2','t t m two'],
+  'TTM (2013)':['ttm','ttm 2013','t t m 2013'],
+  'HYPERION':['hyperion'],
+  'MISTIE III':['mistie 3','mistie iii','misty 3','misty three'],
+  'INTERACT2':['interact 2','interact two'],
+  'ATACH-2':['atach 2','atach two','a tach 2','a tach two'],
+  'CLEAR III':['clear 3','clear iii','clear three'],
+  'ANNEXA-I':['annexa i','annexa 1','annexa one'],
+  'SELECT2':['select 2','select two'],
+  'ANGEL-ASPECT':['angel aspect','angel-aspect'],
+  'ESCAPE-MeVO':['escape mevo','escape m e v o','escape me vo'],
+  'EARLYDRAIN':['early drain','earlydrain'],
+  'BAOCHE':['baoche','bao che'],
+  'WAKE-UP':['wake up','wakeup'],
+  'CRASH-3':['crash 3','crash three'],
+  'DECRA':['decra'],
+  'EUROTHERM3235':['eurotherm 3235','eurotherm'],
+  'TRAIN':['train'],
+  'HEMOTION':['hemotion','he motion'],
+  'POINT':['point'],
+  'CHANCE':['chance'],
+  'DISTAL':['distal'],
+  'TENSION':['tension'],
+  'ATTENTION':['attention'],
+  'DAWN':['dawn'],
+  'MR CLEAN':['mr clean','m r clean'],
+  'NINDS rt-PA':['ninds','ninds rtpa','n i n d s','ninds tpa'],
+  'ECASS III':['ecass 3','ecass iii','ecass three'],
+  'EXTEND':['extend']
+ };
+ if(custom[t.name])a.push(...custom[t.name]);
+ // Roman numerals / punctuation / acronym spacing normalization variants
+ a.push(n.replace(/[-–—]/g,' '));
+ a.push(n.replace(/\biii\b/g,'3').replace(/\bii\b/g,'2').replace(/\bi\b/g,'1'));
+ return [...new Set(a.map(x=>audioNorm(x)).filter(Boolean))];
+}
+function audioNorm(s){
+ return (s||'').toLowerCase()
+  .replace(/\bthree\b/g,'3').replace(/\btwo\b/g,'2').replace(/\bone\b/g,'1')
+  .replace(/\bthird\b/g,'3').replace(/\bsecond\b/g,'2').replace(/\bfirst\b/g,'1')
+  .replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();
+}
+function compactNorm(s){return audioNorm(s).replace(/\s+/g,'')}
+function audioMatch(t,spoken){
+ let s=audioNorm(spoken), sc=compactNorm(spoken);
+ if(!s)return false;
+ return trialAliases(t).some(a=>{
+   let ac=compactNorm(a);
+   return s===a || sc===ac || (ac.length>=5 && sc.includes(ac));
+ });
+}
+function audioCue(t){
+ // Deliberately no trial name, domain, year, or tier.
+ let q=(t.question||'').replace(new RegExp(t.name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'ig'),'this trial');
+ let cue=`${t.population}. ${t.intervention}. ${q}`;
+ return cue.replace(/\s+/g,' ').trim();
+}
+function audioPool(){
+ let due=TRIALS.filter(t=>t.tier===1 && (!S.cards[t.id] || !S.cards[t.id].due || S.cards[t.id].due<=Date.now()));
+ let hard=TRIALS.filter(t=>t.tier===1 && S.cards[t.id] && ['again','hard'].includes(S.cards[t.id].last));
+ let rest=TRIALS.filter(t=>t.tier===1);
+ let ids=new Set(),arr=[];
+ [...hard,...due,...shuffleArray(rest)].forEach(t=>{if(!ids.has(t.id)){ids.add(t.id);arr.push(t)}});
+ return arr;
+}
+function speakAudio(txt,cb){
+ if(!('speechSynthesis' in window)){cb&&cb();return}
+ speechSynthesis.cancel();
+ let u=new SpeechSynthesisUtterance(txt);
+ u.rate=.96;u.pitch=1;
+ u.onend=()=>cb&&cb();
+ u.onerror=()=>cb&&cb();
+ speechSynthesis.speak(u);
+}
+function beep(ok){
+ try{
+  const C=window.AudioContext||window.webkitAudioContext;if(!C)return;
+  const c=new C(),o=c.createOscillator(),g=c.createGain();
+  o.connect(g);g.connect(c.destination);o.frequency.value=ok?720:210;
+  g.gain.setValueAtTime(.06,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+.16);
+  o.start();o.stop(c.currentTime+.17);setTimeout(()=>c.close(),300);
+ }catch(e){}
+}
+function startAudioDrill(){
+ if(!window.isSecureContext){
+   alert('Voice recognition requires a secure HTTPS page. Open the hosted HTTPS version of this trainer.');
+ }
+ AUDIO.running=true;AUDIO.pool=audioPool();
+ document.getElementById('audioPanel').classList.add('show');
+ audioNext();
+}
+function audioNext(){
+ if(!AUDIO.running)return;
+ clearTimeout(AUDIO.timer);
+ document.getElementById('audioPanel').classList.remove('correct','wrong');
+ document.getElementById('audFeedback').textContent='';
+ document.getElementById('audHeard').textContent='';
+ if(!AUDIO.pool.length)AUDIO.pool=audioPool();
+ AUDIO.current=AUDIO.pool.shift();
+ if(!AUDIO.current)return stopAudioDrill();
+ const cue=audioCue(AUDIO.current);
+ document.getElementById('audQ').textContent=cue;
+ document.getElementById('audStatus').textContent='SPEAKING';
+ speakAudio(cue+' Name the trial.',()=>{
+   if(!AUDIO.running)return;
+   setTimeout(()=>audioListen(),250);
+ });
+}
+function setupRecognition(){
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR)return null;
+ const r=new SR();r.lang='en-US';r.interimResults=false;r.continuous=false;r.maxAlternatives=5;
+ r.onstart=()=>{AUDIO.listening=true;document.getElementById('audStatus').textContent='● LISTENING'};
+ r.onend=()=>{AUDIO.listening=false;if(AUDIO.running && document.getElementById('audStatus').textContent.includes('LISTENING')) document.getElementById('audStatus').textContent='TAP LISTEN OR ANSWER'};
+ r.onerror=e=>{AUDIO.listening=false;document.getElementById('audStatus').textContent='VOICE UNAVAILABLE · USE BUTTONS'};
+ r.onresult=e=>{
+   let alts=[];
+   for(let i=0;i<e.results[0].length;i++)alts.push(e.results[0][i].transcript);
+   document.getElementById('audHeard').textContent='Heard: '+alts[0];
+   const ok=alts.some(x=>audioMatch(AUDIO.current,x));
+   audioResult(ok,alts[0],true);
+ };
+ return r;
+}
+function audioListen(){
+ if(!AUDIO.running)return;
+ if('speechSynthesis' in window)speechSynthesis.cancel();
+ if(!AUDIO.recognition)AUDIO.recognition=setupRecognition();
+ if(!AUDIO.recognition){
+   document.getElementById('audStatus').textContent='VOICE NOT SUPPORTED · USE BUTTONS';
+   return;
+ }
+ try{AUDIO.recognition.abort()}catch(e){}
+ try{AUDIO.recognition.start()}catch(e){setTimeout(()=>{try{AUDIO.recognition.start()}catch(_){}},180)}
+}
+function audioGradeMemory(t,ok){
+ let id=t.id,prev=S.cards[id]?JSON.parse(JSON.stringify(S.cards[id])):null,now=Date.now();
+ let c=S.cards[id]||{good:0};
+ let g=ok?'good':'again',days=ok?2:.03;
+ S.history=S.history||[];
+ S.history.push({ts:now,type:'grade',id,grade:g,prev,source:'audio'});
+ if(S.history.length>500)S.history=S.history.slice(-500);
+ c.last=g;c.lastAt=now;c.due=now+days*86400000;c.good=(c.good||0)+(ok?1:0);
+ S.cards[id]=c;
+ if(!ok && t.contrast && t.contrast.length){
+   t.contrast.forEach(cid=>{if(!S.queue.includes(cid))S.queue.unshift(cid)});
+ }
+ save();stats();renderDash();
+}
+function audioResult(ok,heard='',fromVoice=false){
+ if(!AUDIO.running||!AUDIO.current)return;
+ try{AUDIO.recognition&&AUDIO.recognition.abort()}catch(e){}
+ let p=document.getElementById('audioPanel'),t=AUDIO.current;
+ p.classList.remove('correct','wrong');p.classList.add(ok?'correct':'wrong');
+ document.getElementById('audStatus').textContent=ok?'CORRECT':'INCORRECT';
+ document.getElementById('audFeedback').textContent=ok?`✓ ${t.name}`:`✕ Correct answer: ${t.name}`;
+ beep(ok);audioGradeMemory(t,ok);
+ let spoken=ok?`Correct. ${t.name}.`:`Incorrect. The trial is ${t.name}. ${t.trap||t.bottom}`;
+ speakAudio(spoken,()=>{AUDIO.timer=setTimeout(audioNext,850)});
+}
+function audioManual(ok){audioResult(ok,'',false)}
+function audioSkip(){
+ if(!AUDIO.running)return;
+ try{AUDIO.recognition&&AUDIO.recognition.abort()}catch(e){}
+ if('speechSynthesis' in window)speechSynthesis.cancel();
+ audioNext();
+}
+function stopAudioDrill(){
+ AUDIO.running=false;clearTimeout(AUDIO.timer);
+ try{AUDIO.recognition&&AUDIO.recognition.abort()}catch(e){}
+ if('speechSynthesis' in window)speechSynthesis.cancel();
+ document.getElementById('audioPanel').classList.remove('show','correct','wrong');
+ document.getElementById('audStatus').textContent='STOPPED';
+}
+
+function currentPhase(){
+ let exam=new Date('2026-10-05T00:00:00'); let days=Math.ceil((exam-Date.now())/86400000);
+ if(days<=4)return {name:'LOCKDOWN',txt:'No new material. Review misses, Hard cards, and contrast pairs only.'};
+ if(days<=10)return {name:'CLINICAL RETRIEVAL',txt:'Reverse recall dominates. Minimize new Tier 2 material.'};
+ if(days<=18)return {name:'DISCRIMINATION',txt:'Contrast pairs dominate. New material slows sharply.'};
+ return {name:'ACQUISITION',txt:'Build Tier 1 with cold recall plus scheduled reviews.'};
+}
+function phase(){let p=currentPhase();$('#phaseName').textContent=p.name;$('#phaseText').textContent=p.txt}
+function basePool(){
+ let p=currentPhase().name;
+ let qids=S.queue.filter(id=>TRIALS.some(t=>t.id===id)); let queued=qids.map(id=>TRIALS.find(t=>t.id===id));
+ if(queued.length)return queued;
+ let t1=TRIALS.filter(t=>t.tier===1&&due(t));
+ if(t1.length)return t1;
+ if(p==='ACQUISITION')return TRIALS.filter(t=>t.tier===2&&due(t));
+ return TRIALS.filter(t=>t.tier===1);
+}
+let studyIndex=0, studyPool=[];
+function setMode(m){S.mode=m;save();$$('.modebtn').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));startStudy()}
+function shuffleArray(arr){
+ let a=[...arr];
+ for(let i=a.length-1;i>0;i--){
+   const j=Math.floor(Math.random()*(i+1));
+   [a[i],a[j]]=[a[j],a[i]];
+ }
+ return a;
+}
+function startStudy(){
+ studyPool=shuffleArray(basePool()); studyIndex=0; renderStudy()
+}
+function renderStudy(){
+ let area=$('#studyArea'); if(!studyPool.length){area.innerHTML='<div class="studybox">Nothing due right now. Use a domain bar or Tier filter for reference review.</div>';return}
+ let t=studyPool[studyIndex%studyPool.length],mode=S.mode; currentStudyId=t.id;
+ let prompt='',target='';
+ if(mode==='cold'){prompt=`Identify the trial from this study setup, then give the major result and board takeaway:\n\n${t.population}\n${t.intervention}`;target=`TRIAL: ${t.name} (${t.year})\n\nQuestion: ${t.question}\n\nResult: ${t.result}\n\nBOTTOM LINE: ${t.bottom}\n\nTRAP: ${t.trap}`}
+ if(mode==='reverse'){prompt=`Clinical evidence cue:\n${t.question}\n\nName the trial and state the finding.`;target=`${t.name} (${t.year})\n${t.result}\n\nBOTTOM LINE: ${t.bottom}\n\nTRAP: ${t.trap}`}
+ if(mode==='contrast'){
+   let cn=(t.contrast||'').split('|').filter(Boolean)[0], c=TRIALS.find(x=>x.name===cn);
+   if(!c){prompt=`${t.name}: State the single most important discriminator from the trial you are most likely to confuse it with.`;target=`${t.trap}`}
+   else{prompt=`${t.name} ↔ ${c.name}\n\n1) What population/window separates them?\n2) What intervention/result separates them?\n3) What is the board trap?`;target=`${t.name}: ${t.bottom}\nPopulation: ${t.population}\n\n${c.name}: ${c.bottom}\nPopulation: ${c.population}\n\nDISCRIMINATOR: ${t.trap}`}
+ }
+ area.innerHTML=`<div class="studybox"><div class="prompt" style="white-space:pre-line">${esc(prompt)}</div><textarea id="typed" class="answerbox" placeholder="Type before revealing. Fragments are fine." oninput="updateLiveCoverage()"></textarea>
+<div class="livecov"><span>Answer coverage</span><div class="livebar"><div class="livefill" id="liveFill"></div></div><b id="livePct">0%</b></div><button class="smallbtn reveal" onclick="renderCoverage(TRIALS.find(x=>x.id===currentStudyId));document.getElementById('rv').classList.add('show')">REVEAL</button><div id="coverageSlot"></div><div id="rv" class="revealed"><div class="field bottom"><div class="label">Answer</div><p style="white-space:pre-line">${esc(target)}</p></div><div class="gradebar"><button class="grade again" onclick="grade('${t.id}','again')">Again</button><button class="grade hard" onclick="grade('${t.id}','hard')">Hard</button><button class="grade good" onclick="grade('${t.id}','good')">Good</button><button class="grade easy" onclick="grade('${t.id}','easy')">Easy</button></div></div><div class="studyNav"><button class="smallbtn" onclick="prevCard()">← Prev</button><span class="notice">${studyIndex+1} / ${studyPool.length}</span><button class="smallbtn" onclick="nextCard()">Next →</button></div></div>`
+}
+function queueContrast(t){
+ let cn=(t.contrast||'').split('|').filter(Boolean)[0], c=TRIALS.find(x=>x.name===cn); if(c&&!S.queue.includes(c.id))S.queue.unshift(c.id)
+}
+function grade(id,g){
+ let prev=S.cards[id]?JSON.parse(JSON.stringify(S.cards[id])):null;
+ let c=S.cards[id]||{good:0};let now=Date.now(),days={again:.03,hard:.5,good:2,easy:5}[g];
+ S.history.push({ts:now,type:'grade',id:id,grade:g,prev:prev});
+ if(S.history.length>500)S.history=S.history.slice(-500); // ~43 min, 12h, 2d, 5d
+ c.lastGrade=g;c.last=now;c.next=now+days*86400000;c.good=(g==='good'||g==='easy')?(c.good||0)+1:Math.max(0,(c.good||0)-1);S.cards[id]=c;
+ S.queue=S.queue.filter(x=>x!==id);let t=TRIALS.find(x=>x.id===id); if(g==='again'||g==='hard')queueContrast(t);
+ save();stats();renderDash();startStudy()
+}
+function nextCard(){studyIndex=(studyIndex+1)%studyPool.length;renderStudy()}
+function prevCard(){studyIndex=(studyIndex-1+studyPool.length)%studyPool.length;renderStudy()}
+function resetProgress(){resetFullMemory()}
+function init(){
+ renderTrials();stats();renderDash();phase();setMode(S.mode||'cold');
+}
+
+function toggleReferenceSection(forceOpen=false){
+  const ref=document.getElementById('refSection');
+  if(!ref) return;
+  if(forceOpen) ref.classList.remove('collapsed');
+  else ref.classList.toggle('collapsed');
+}
+function collapseAll(){
+  document.querySelectorAll('.trial.open').forEach(x=>x.classList.remove('open'));
+  document.getElementById('refSection')?.classList.add('collapsed');
+  document.getElementById('top')?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+document.addEventListener('click',e=>{
+  const head=e.target.closest('.trialhead');
+  if(head){ head.closest('.trial')?.classList.toggle('open'); }
+});
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSearch();if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch()}});
+init();
+</script>
+<script>
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+}
+</script>
+
+</body></html>
